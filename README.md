@@ -12,23 +12,31 @@ O protótipo original continua disponível em `index.html`. A aplicação funcio
 
 ## Executar localmente
 
-Em um terminal, inicie a API:
+Instale as dependências do comando que inicia os dois servidores:
 
 ```powershell
-cd backend
-php artisan migrate --seed
-php artisan serve
+npm.cmd install
 ```
 
-Em outro terminal, inicie o React:
+Na primeira execução, prepare o banco e as dependências do frontend:
 
 ```powershell
 cd frontend
-npm install
-npm run dev
+npm.cmd install
+cd ..\backend
+php artisan migrate --seed
 ```
 
-Abra o endereço exibido pelo Vite. Durante o desenvolvimento, as requisições `/api` são encaminhadas para o Laravel em `http://127.0.0.1:8000`.
+Na raiz do repositório, inicie a API e o frontend juntos:
+
+```powershell
+cd ..
+npm.cmd run dev:all
+```
+
+Abra o endereço exibido pelo Vite. Durante o desenvolvimento, as requisições `/api` são encaminhadas para o Laravel em `http://127.0.0.1:8000`. O comando encerra os dois processos se um deles falhar; use `Ctrl+C` para parar ambos.
+
+Também é possível iniciar os dois servidores a partir da pasta `frontend` com `npm.cmd run dev:all`.
 
 O seeder cria cinco registros demonstrativos de cada cadastro principal e cinco parcelas para cada contrato. Ele pode ser executado novamente sem duplicar os dados de demonstração usando `php artisan db:seed`.
 

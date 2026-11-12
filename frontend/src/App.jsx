@@ -146,7 +146,7 @@ function tableActionButtons(resource, record) {
   </span>`
 }
 
-function makeDocument(records) {
+function makeDocument(records, registrationTab) {
   const parsed = new DOMParser().parseFromString(legacyDocument, 'text/html')
 
   parsed.querySelectorAll('script').forEach((script) => {
@@ -184,7 +184,7 @@ function makeDocument(records) {
       </div>
     </div>`).join('')
 
-  const userCards = users.map((user) => `
+  const renderUserCards = (recordsToRender) => recordsToRender.map((user) => `
     <div class="bg-white p-5 rounded-2xl shadow-sm border border-slate-200 flex flex-col justify-between hover:shadow-md transition">
       <div class="flex items-start justify-between">
         <div class="w-10 h-10 rounded-full bg-slate-100 flex items-center justify-center font-bold text-slate-700">${escapeHtml(user.name.slice(0, 1))}</div>
@@ -199,6 +199,8 @@ function makeDocument(records) {
         <button type="button" data-delete-resource="users" data-record-id="${user.id}" class="text-red-500 hover:text-red-700 text-xs">Excluir</button>
       </div>
     </div>`).join('')
+  const userCards = renderUserCards(users)
+  const registrationUserCards = renderUserCards(users.filter((user) => user.role === registrationTab))
 
   const contractRows = activeContracts.map((contract) => `
     <tr class="hover:bg-slate-50 transition">
@@ -233,8 +235,28 @@ function makeDocument(records) {
       <td class="p-3 text-right">${tableActionButtons('contracts', contract)}</td>
     </tr>`).join('')
 
-  const clientGrid = parsed.querySelector('#screen-cadastros-list .grid')
-  if (clientGrid) clientGrid.innerHTML = clientCards || '<p class="text-sm text-slate-500">Nenhum cliente cadastrado.</p>'
+  const registrationGrid = parsed.querySelector('#screen-cadastros-list .grid')
+  if (registrationGrid) {
+    const isClientTab = registrationTab === 'clients'
+    registrationGrid.innerHTML = isClientTab
+      ? clientCards || '<p class="text-sm text-slate-500">Nenhum cliente cadastrado.</p>'
+      : registrationUserCards || `<p class="text-sm text-slate-500">Nenhum ${roles[registrationTab]?.toLowerCase() || 'usuário'} cadastrado.</p>`
+
+    parsed.querySelectorAll('[data-registration-create]').forEach((button) => {
+      const resource = button.dataset.registrationCreate
+      button.hidden = (resource === 'clients') !== isClientTab
+      if (resource === 'users') {
+        button.textContent = `+ Novo ${roles[registrationTab]?.toLowerCase() || 'usuário'}`
+      }
+    })
+  }
+  parsed.querySelectorAll('[data-registration-tab]').forEach((button) => {
+    const isActive = button.dataset.registrationTab === registrationTab
+    button.className = isActive
+      ? 'pb-3 border-b-2 border-blue-600 text-blue-600'
+      : 'pb-3 text-slate-400 hover:text-slate-600'
+    button.setAttribute('aria-pressed', String(isActive))
+  })
 
   const teamGrid = parsed.querySelector('#screen-financeiro-usuarios .grid')
   if (teamGrid) teamGrid.innerHTML = userCards || '<p class="text-sm text-slate-500">Nenhum usuário cadastrado.</p>'
@@ -420,14 +442,26 @@ async function request(path, options = {}) {
     },
   })
 
-  if (!response.ok) {
-    const result = await response.json().catch(() => ({}))
-    const validationMessage = Object.values(result.errors || {}).flat()[0]
-    throw new Error(validationMessage || result.message || `A API respondeu com erro ${response.status}.`)
+  if (response.status === 204) return null
+
+  const body = await response.text()
+  let result = null
+  if (body) {
+    try {
+      result = JSON.parse(body)
+    } catch {
+      if (response.ok) {
+        throw new Error(`A API retornou uma resposta inválida (HTTP ${response.status}).`)
+      }
+    }
   }
 
-  if (response.status === 204) return null
-  return response.json()
+  if (!response.ok) {
+    const validationMessage = Object.values(result?.errors || {}).flat()[0]
+    throw new Error(validationMessage || result?.message || `A API respondeu com erro ${response.status}.`)
+  }
+
+  return result
 }
 
 function selectOptions(field, records) {
@@ -467,7 +501,7 @@ function normalizePayload(resource, form) {
 }
 
 function ResourceForm({ editor, records, onClose, onSave, saving }) {
-  const { resource, record } = editor
+  const { resource, record, initialValues } = editor
 
   return (
     <div className="fixed inset-0 z-[100] flex items-center justify-center bg-slate-900/50 p-4" role="presentation" onMouseDown={(event) => {
@@ -483,7 +517,7 @@ function ResourceForm({ editor, records, onClose, onSave, saving }) {
           onSave(event.currentTarget)
         }} data-create={!record}>
           {fields[resource].map((field) => {
-            const value = record?.[field.name] ?? (resource === 'users' && field.name === 'role' ? 'seller' : '')
+            const value = record?.[field.name] ?? initialValues?.[field.name] ?? (resource === 'users' && field.name === 'role' ? 'seller' : '')
             const required = field.required || (field.requiredOnCreate && !record)
             if (field.type === 'checkbox') {
               return (
@@ -540,11 +574,16 @@ function App() {
   const [toast, setToast] = useState('')
   const [saving, setSaving] = useState(false)
   const [activeScreen, setActiveScreen] = useState('screen-login')
-  const markup = useMemo(() => makeDocument(records), [records])
+  const [registrationTab, setRegistrationTab] = useState('clients')
+  const [theme, setTheme] = useState(() => window.localStorage.getItem('gerenciamento-theme') || 'dark')
+  const markup = useMemo(() => makeDocument(records, registrationTab), [records, registrationTab])
 
   const refresh = useCallback(async () => {
     const entries = await Promise.all(Object.entries(endpoints).map(async ([resource, endpoint]) => {
       const result = await request(endpoint)
+      if (!Array.isArray(result) && !Array.isArray(result?.data)) {
+        throw new Error(`A API não retornou uma lista válida para ${labels[resource].toLowerCase()}.`)
+      }
       return [resource, result.data || result]
     }))
     setRecords(Object.fromEntries(entries))
@@ -568,6 +607,20 @@ function App() {
   }, [refresh, showLoadError])
 
   useEffect(() => {
+    document.documentElement.dataset.theme = theme
+    window.localStorage.setItem('gerenciamento-theme', theme)
+
+    const isDark = theme === 'dark'
+    document.querySelectorAll('[data-theme-toggle]').forEach((toggle) => {
+      toggle.setAttribute('aria-pressed', String(isDark))
+      toggle.setAttribute('aria-label', isDark ? 'Ativar tema claro' : 'Ativar tema escuro')
+      toggle.setAttribute('title', isDark ? 'Ativar tema claro' : 'Ativar tema escuro')
+      toggle.querySelector('[data-theme-icon="sun"]')?.classList.toggle('hidden', !isDark)
+      toggle.querySelector('[data-theme-icon="moon"]')?.classList.toggle('hidden', isDark)
+    })
+  }, [theme, markup])
+
+  useEffect(() => {
     const applyScreen = (screenId) => {
       const loginScreen = screenId === 'screen-login' || screenId === 'screen-forgot-password'
       document.getElementById('app-layout')?.classList.toggle('hidden', loginScreen)
@@ -588,6 +641,21 @@ function App() {
     applyScreen(activeScreen)
 
     const onClick = (event) => {
+      const themeButton = event.target.closest('[data-theme-toggle]')
+      if (themeButton) {
+        event.preventDefault()
+        setTheme((currentTheme) => currentTheme === 'dark' ? 'light' : 'dark')
+        return
+      }
+
+      const registrationButton = event.target.closest('[data-registration-tab]')
+      if (registrationButton) {
+        event.preventDefault()
+        event.stopImmediatePropagation()
+        setRegistrationTab(registrationButton.dataset.registrationTab)
+        return
+      }
+
       const target = event.target.closest('[data-create-resource], [data-edit-resource], [data-delete-resource]')
       if (!target) return
       event.preventDefault()
@@ -596,7 +664,11 @@ function App() {
       const resource = target.dataset.createResource || target.dataset.editResource || target.dataset.deleteResource
       const recordId = target.dataset.recordId
       if (target.dataset.createResource) {
-        setEditor({ resource, record: null })
+        setEditor({
+          resource,
+          record: null,
+          initialValues: resource === 'users' && registrationTab !== 'clients' ? { role: registrationTab } : undefined,
+        })
       } else if (target.dataset.editResource) {
         const record = (records[resource] || []).find((item) => String(item.id) === recordId)
         if (record) setEditor({ resource, record })
@@ -650,7 +722,7 @@ function App() {
       delete window.showModal
       delete window.closeModal
     }
-  }, [activeScreen, records, refresh])
+  }, [activeScreen, records, refresh, registrationTab])
 
   const saveRecord = async (form) => {
     setSaving(true)

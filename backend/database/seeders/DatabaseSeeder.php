@@ -53,7 +53,7 @@ class DatabaseSeeder extends Seeder
         $clients = collect([
             ['name' => 'Senac', 'document' => '12.345.678/0001-90'],
             ['name' => 'IMPCG', 'document' => '23.456.789/0001-01'],
-            ['name' => 'Mais Code', 'document' => '34.567.890/0001-12'],
+            ['name' => 'Gerenciamento', 'document' => '34.567.890/0001-12'],
             ['name' => 'Instituto Campo Grande', 'document' => '45.678.901/0001-23'],
             ['name' => 'Prefeitura Municipal', 'document' => '56.789.012/0001-34'],
         ])->map(function (array $attributes, int $index) use ($customerTypes) {

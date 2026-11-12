@@ -4,9 +4,283 @@ body,
   min-height: 100%;
 }
 
+:root {
+  color-scheme: dark;
+  --app-background: #1A1A24;
+  --app-surface: #262636;
+  --app-surface-muted: #262636;
+  --app-surface-subtle: #262636;
+  --app-surface-raised: #303044;
+  --app-surface-hover: #303044;
+  --app-surface-hover-strong: #3A3A4D;
+  --app-sidebar: #1A1A24;
+  --app-sidebar-hover: #303044;
+  --app-sidebar-text: #B0B0C3;
+  --app-sidebar-text-muted: #B0B0C3;
+  --app-text-primary: #F1F1F6;
+  --app-text-medium: #D8D8E2;
+  --app-text-secondary: #B0B0C3;
+  --app-on-strong: #F1F1F6;
+  --app-accent: #7C4DFF;
+  --app-accent-hover: #6B3DE0;
+  --app-accent-soft: #B39AFF;
+  --app-accent-muted: #33294F;
+  --app-accent-muted-hover: #40345F;
+  --app-border: #3A3A4D;
+  --app-overlay: rgb(26 26 36 / 60%);
+  --app-success: #8BD5A6;
+  --app-success-bg: #20372D;
+  --app-danger: #F2A0AA;
+  --app-danger-bg: #3B282F;
+  --app-danger-hover: #492A33;
+  --app-scrollbar: #45455A;
+  --app-scrollbar-hover: #5A5A72;
+}
+
+:root[data-theme="light"] {
+  color-scheme: light;
+  --app-background: #F3F4F6;
+  --app-surface: #FFFFFF;
+  --app-surface-muted: #F8FAFC;
+  --app-surface-subtle: #F1F5F9;
+  --app-surface-raised: #E2E8F0;
+  --app-surface-hover: #F1F5F9;
+  --app-surface-hover-strong: #CBD5E1;
+  --app-sidebar: #0F172A;
+  --app-sidebar-hover: #334155;
+  --app-sidebar-text: #CBD5E1;
+  --app-sidebar-text-muted: #94A3B8;
+  --app-text-primary: #1E293B;
+  --app-text-medium: #334155;
+  --app-text-secondary: #64748B;
+  --app-on-strong: #FFFFFF;
+  --app-accent-hover: #6B3DE0;
+  --app-accent-soft: #6B3DE0;
+  --app-accent-muted: #F3EFFF;
+  --app-accent-muted-hover: #E9DEFF;
+  --app-border: #E2E8F0;
+  --app-overlay: rgb(15 23 42 / 50%);
+  --app-success: #15803D;
+  --app-success-bg: #DCFCE7;
+  --app-danger: #DC2626;
+  --app-danger-bg: #FEE2E2;
+  --app-danger-hover: #FECACA;
+  --app-scrollbar: #CBD5E1;
+  --app-scrollbar-hover: #94A3B8;
+}
+
 body {
   margin: 0;
+  background-color: var(--app-background);
+  color: var(--app-text-primary);
   font-family: ui-sans-serif, system-ui, sans-serif;
+}
+
+.bg-gray-100 {
+  background-color: var(--app-background) !important;
+}
+
+.bg-white {
+  background-color: var(--app-surface) !important;
+}
+
+.bg-slate-50 {
+  background-color: var(--app-surface-muted) !important;
+}
+
+.bg-slate-100 {
+  background-color: var(--app-surface-subtle) !important;
+}
+
+.bg-slate-200,
+.bg-slate-300 {
+  background-color: var(--app-surface-raised) !important;
+}
+
+.bg-slate-800 {
+  background-color: var(--app-sidebar-hover) !important;
+}
+
+.bg-slate-900,
+.bg-gray-900 {
+  background-color: var(--app-sidebar) !important;
+}
+
+.bg-blue-50,
+.bg-blue-100,
+.bg-indigo-100 {
+  background-color: var(--app-accent-muted) !important;
+}
+
+.bg-blue-200 {
+  background-color: var(--app-accent-muted-hover) !important;
+}
+
+.bg-blue-600 {
+  background-color: var(--app-accent) !important;
+}
+
+.bg-green-50,
+.bg-green-100 {
+  background-color: var(--app-success-bg) !important;
+}
+
+.bg-red-50,
+.bg-red-100,
+.bg-red-200 {
+  background-color: var(--app-danger-bg) !important;
+}
+
+[class~="bg-slate-900/50"] {
+  background-color: var(--app-overlay) !important;
+}
+
+.text-white {
+  color: var(--app-on-strong) !important;
+}
+
+.text-gray-800,
+.text-slate-800,
+.text-slate-900 {
+  color: var(--app-text-primary) !important;
+}
+
+.text-slate-700 {
+  color: var(--app-text-medium) !important;
+}
+
+.text-slate-300,
+.text-slate-400,
+.text-slate-500,
+.text-slate-600 {
+  color: var(--app-text-secondary) !important;
+}
+
+.text-blue-600,
+.text-blue-700,
+.text-blue-800,
+.text-indigo-700 {
+  color: var(--app-accent) !important;
+}
+
+.text-blue-200,
+.text-blue-400 {
+  color: var(--app-accent-soft) !important;
+}
+
+.text-green-600,
+.text-green-700,
+.text-green-800 {
+  color: var(--app-success) !important;
+}
+
+.text-red-300,
+.text-red-400,
+.text-red-500,
+.text-red-600,
+.text-red-700 {
+  color: var(--app-danger) !important;
+}
+
+.border-slate-100,
+.border-slate-200,
+.border-slate-300,
+.border-slate-800,
+.divide-slate-100 {
+  border-color: var(--app-border) !important;
+}
+
+.border-blue-200,
+.border-blue-500,
+.border-blue-600 {
+  border-color: var(--app-accent) !important;
+}
+
+.hover\:bg-blue-700:hover {
+  background-color: var(--app-accent-hover) !important;
+}
+
+.hover\:bg-blue-50:hover {
+  background-color: var(--app-accent-muted) !important;
+}
+
+.hover\:bg-slate-50:hover,
+.hover\:bg-slate-100:hover {
+  background-color: var(--app-surface-hover) !important;
+}
+
+.hover\:bg-slate-200:hover,
+.hover\:bg-slate-300:hover {
+  background-color: var(--app-surface-hover-strong) !important;
+}
+
+.hover\:bg-slate-800:hover {
+  background-color: var(--app-sidebar-hover) !important;
+}
+
+.hover\:bg-slate-900:hover {
+  background-color: var(--app-sidebar) !important;
+}
+
+.hover\:bg-red-50:hover,
+.hover\:bg-red-100:hover,
+.hover\:bg-red-200:hover {
+  background-color: var(--app-danger-hover) !important;
+}
+
+.hover\:text-blue-600:hover,
+.hover\:text-blue-800:hover {
+  color: var(--app-accent) !important;
+}
+
+.hover\:text-slate-600:hover {
+  color: var(--app-text-secondary) !important;
+}
+
+.hover\:text-slate-900:hover,
+.hover\:text-white:hover {
+  color: var(--app-on-strong) !important;
+}
+
+.hover\:text-red-300:hover,
+.hover\:text-red-600:hover,
+.hover\:text-red-700:hover {
+  color: var(--app-danger) !important;
+}
+
+.focus\:border-blue-500:focus,
+.focus\:border-blue-600:focus {
+  border-color: var(--app-accent) !important;
+}
+
+input:not([type="checkbox"]):not([type="radio"]),
+select,
+textarea {
+  color: var(--app-text-primary);
+}
+
+select {
+  background-color: var(--app-surface);
+  border-color: var(--app-border);
+}
+
+input[type="checkbox"],
+input[type="radio"] {
+  accent-color: var(--app-accent);
+}
+
+.bg-slate-900 .text-slate-300,
+.bg-slate-900 .text-slate-400 {
+  color: var(--app-sidebar-text) !important;
+}
+
+.bg-slate-900 .text-slate-500 {
+  color: var(--app-sidebar-text-muted) !important;
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: var(--app-text-secondary);
 }
 
 .custom-scrollbar::-webkit-scrollbar {
@@ -15,14 +289,14 @@ body {
 }
 
 .custom-scrollbar::-webkit-scrollbar-track {
-  background: #f1f1f1;
+  background: var(--app-background);
 }
 
 .custom-scrollbar::-webkit-scrollbar-thumb {
-  background: #cbd5e1;
+  background: var(--app-scrollbar);
   border-radius: 3px;
 }
 
 .custom-scrollbar::-webkit-scrollbar-thumb:hover {
-  background: #94a3b8;
+  background: var(--app-scrollbar-hover);
 }

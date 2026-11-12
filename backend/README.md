@@ -1,4 +1,4 @@
-# MAIS CODE — API Laravel
+# Gerenciamento — API Laravel
 
 API REST e migrations do sistema de gestão. Configure o banco SQLite no `.env` e execute:
 
