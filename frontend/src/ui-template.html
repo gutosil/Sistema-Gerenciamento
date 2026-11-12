@@ -6,7 +6,7 @@
     <title>MAIS CODE - Sistema de Gestão</title>
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Font Awesome Icons -->
+    <!-- Ícones do Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script>
         tailwind.config = {
@@ -40,9 +40,9 @@
 </head>
 <body class="bg-gray-100 font-sans text-gray-800 antialiased min-h-screen">
 
-    <!-- LOGIN SCREEN -->
+    <!-- TELA DE LOGIN -->
     <div id="screen-login" class="flex min-h-screen bg-slate-100">
-        <!-- Left Side: Banner / Info -->
+        <!-- Lado esquerdo: banner / informações -->
         <div class="hidden lg:flex lg:w-1/2 bg-slate-900 text-white flex-col justify-between p-12 relative overflow-hidden">
             <div class="absolute -right-20 -bottom-20 w-96 h-96 bg-blue-600 rounded-full blur-3xl opacity-20"></div>
             <div class="z-10">
@@ -63,7 +63,7 @@
             </div>
         </div>
 
-        <!-- Right Side: Login Form -->
+        <!-- Lado direito: formulário de login -->
         <div class="w-full lg:w-1/2 flex items-center justify-center p-6 md:p-12">
             <div class="w-full max-w-md bg-white p-8 md:p-10 rounded-2xl shadow-xl border border-slate-100">
                 <div class="lg:hidden text-center mb-8">
@@ -105,7 +105,7 @@
         </div>
     </div>
 
-    <!-- FORGOT PASSWORD SCREEN -->
+    <!-- TELA DE RECUPERAÇÃO DE SENHA -->
     <div id="screen-forgot-password" class="hidden flex min-h-screen bg-slate-100">
         <div class="hidden lg:flex lg:w-1/2 bg-slate-900 text-white flex-col justify-between p-12">
             <div>
@@ -151,10 +151,10 @@
         </div>
     </div>
 
-    <!-- MAIN APP LAYOUT (HEADER + SIDEBAR + CONTENT) -->
+    <!-- ESTRUTURA PRINCIPAL DO APLICATIVO (CABEÇALHO + BARRA LATERAL + CONTEÚDO) -->
     <div id="app-layout" class="hidden min-h-screen flex flex-col">
         
-        <!-- HEADER -->
+        <!-- CABEÇALHO -->
         <header class="bg-white border-b border-slate-200 h-16 flex items-center justify-between px-4 md:px-6 sticky top-0 z-20">
             <div class="flex items-center gap-4">
                 <button onclick="toggleSidebar()" class="lg:hidden text-slate-600 hover:text-slate-900 p-2">
@@ -166,7 +166,7 @@
                 </div>
             </div>
 
-            <!-- Header Right / User Welcome -->
+            <!-- Lado direito do cabeçalho / boas-vindas ao usuário -->
             <div class="flex items-center gap-4">
                 <div class="text-right hidden sm:block">
                     <p class="text-sm font-semibold text-slate-800">Bem-vindo, Calebe</p>
@@ -179,7 +179,7 @@
         </header>
 
         <div class="flex flex-1">
-            <!-- SIDEBAR -->
+            <!-- BARRA LATERAL -->
             <aside id="sidebar" class="fixed lg:static inset-y-0 left-0 transform -translate-x-full lg:translate-x-0 transition-transform duration-200 ease-in-out z-30 w-64 bg-slate-900 text-slate-300 flex flex-col justify-between border-r border-slate-800">
                 <div class="p-4">
                     <div class="text-xs font-semibold text-slate-500 uppercase tracking-wider px-3 mb-4">Navegação</div>
@@ -215,12 +215,12 @@
                 </div>
             </aside>
 
-            <!-- MAIN CONTENT CONTAINER -->
+            <!-- CONTÊINER DO CONTEÚDO PRINCIPAL -->
             <main class="flex-1 p-4 md:p-8 overflow-y-auto custom-scrollbar">
 
-                <!-- 1. HOME SCREEN (PAGE 3) -->
+                <!-- 1. TELA INICIAL (PÁGINA 3) -->
                 <div id="screen-home" class="app-screen space-y-6">
-                    <!-- Top Vendedores Podio -->
+                    <!-- Pódio dos principais vendedores -->
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
                         <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 flex flex-col items-center justify-center text-center">
                             <span class="text-xs font-bold text-amber-600 bg-amber-100 px-3 py-1 rounded-full mb-2">#2 LUGAR</span>
@@ -242,7 +242,7 @@
                         </div>
                     </div>
 
-                    <!-- Remuneração & Card -->
+                    <!-- Remuneração e cartão -->
                     <div class="bg-gradient-to-r from-blue-600 to-indigo-700 text-white p-6 rounded-2xl shadow-lg flex flex-col sm:flex-row items-center justify-between gap-4">
                         <div>
                             <p class="text-xs uppercase tracking-wider text-blue-200 font-medium">Remuneração Atual</p>
@@ -253,7 +253,7 @@
                         </button>
                     </div>
 
-                    <!-- Últimas Vendas Table -->
+                    <!-- Tabela das vendas recentes -->
                     <div class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6">
                         <h3 class="text-lg font-bold text-slate-800 mb-4">Últimas Vendas</h3>
                         <div class="overflow-x-auto">
@@ -289,7 +289,7 @@
                     </div>
                 </div>
 
-                <!-- 2. PERFIL USER SCREEN (PAGES 4, 5, 6) -->
+                <!-- 2. TELA DO PERFIL DO USUÁRIO (PÁGINAS 4, 5, 6) -->
                 <div id="screen-profile" class="app-screen hidden max-w-2xl mx-auto">
                     <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-200 text-center">
                         <h2 class="text-xl font-bold text-slate-800 mb-6 text-left">Usuário</h2>
@@ -330,7 +330,7 @@
                     </div>
                 </div>
 
-                <!-- 3. RELATÓRIO SCREEN (PAGE 7) -->
+                <!-- 3. TELA DE RELATÓRIOS (PÁGINA 7) -->
                 <div id="screen-relatorio" class="app-screen hidden space-y-6">
                     <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
                         <h2 class="text-2xl font-bold text-slate-800">Relatório de Vendas</h2>
@@ -391,7 +391,7 @@
                     </div>
                 </div>
 
-                <!-- 4. DETALHES DA VENDA / CONTRATO (PAGES 8, 9, 10, 11, 12, 13, 14) -->
+                <!-- 4. DETALHES DA VENDA / CONTRATO (PÁGINAS 8, 9, 10, 11, 12, 13, 14) -->
                 <div id="screen-venda-detalhes" class="app-screen hidden max-w-5xl mx-auto space-y-6">
                     <div class="flex justify-between items-center">
                         <h2 class="text-2xl font-bold text-slate-800">Detalhes da Venda / Novo Contrato</h2>
@@ -400,7 +400,7 @@
 
                     <form onsubmit="event.preventDefault(); showModal('modal-confirm-cadastro-contrato');">
                         <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                            <!-- Left: Dados do Contrato -->
+                            <!-- Lado esquerdo: dados do contrato -->
                             <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 space-y-4">
                                 <h3 class="font-bold text-slate-800 border-b pb-2">Dados do Contrato</h3>
                                 
@@ -463,7 +463,7 @@
                                 </div>
                             </div>
 
-                            <!-- Right: Forma de Pagamento & Ações -->
+                            <!-- Lado direito: forma de pagamento e ações -->
                             <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 flex flex-col justify-between space-y-4">
                                 <div>
                                     <h3 class="font-bold text-slate-800 border-b pb-2">Forma de Pagamento</h3>
@@ -526,7 +526,7 @@
                     </form>
                 </div>
 
-                <!-- 5. CADASTRO CLIENTE SCREEN (PAGES 15, 16, 21, 22) -->
+                <!-- 5. CADASTRO DE CLIENTE (PÁGINAS 15, 16, 21, 22) -->
                 <div id="screen-cadastro-cliente" class="app-screen hidden max-w-xl mx-auto">
                     <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-200 text-center">
                         <div class="w-16 h-16 bg-blue-50 rounded-2xl flex items-center justify-center text-blue-600 text-2xl mx-auto mb-4">
@@ -561,7 +561,7 @@
                     </div>
                 </div>
 
-                <!-- 6. FINANCEIRO / LISTA DE USUÁRIOS (PAGE 17) -->
+                <!-- 6. FINANCEIRO / LISTA DE USUÁRIOS (PÁGINA 17) -->
                 <div id="screen-financeiro-usuarios" class="app-screen hidden space-y-6">
                     <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
                         <h2 class="text-2xl font-bold text-slate-800">Financeiro & Equipe</h2>
@@ -603,7 +603,7 @@
                     </div>
                 </div>
 
-                <!-- 7. GESTÃO DE COMISSÕES (PAGES 18, 19) -->
+                <!-- 7. GESTÃO DE COMISSÕES (PÁGINAS 18, 19) -->
                 <div id="screen-comissoes" class="app-screen hidden space-y-6">
                     <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
                         <div>
@@ -652,14 +652,14 @@
                     </div>
                 </div>
 
-                <!-- 8. DETALHES DA COMISSÃO (PAGE 19) -->
+                <!-- 8. DETALHES DA COMISSÃO (PÁGINA 19) -->
                 <div id="screen-comissao-detalhes" class="app-screen hidden max-w-4xl mx-auto space-y-6">
                     <div class="flex justify-between items-center">
                         <h2 class="text-2xl font-bold text-slate-800">Detalhes da Comissão</h2>
                         <button onclick="navigateTo('screen-comissoes')" class="text-xs bg-slate-200 hover:bg-slate-300 px-3 py-1.5 rounded-lg font-medium">Voltar</button>
                     </div>
 
-                    <!-- Card Contrato Resumo -->
+                    <!-- Cartão de resumo do contrato -->
                     <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 grid grid-cols-1 sm:grid-cols-3 gap-4">
                         <div>
                             <span class="text-xs text-slate-400 block">Nº Contrato</span>
@@ -675,7 +675,7 @@
                         </div>
                     </div>
 
-                    <!-- Tabela de Parcelas e Comissões -->
+                    <!-- Tabela de parcelas e comissões -->
                     <div class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6">
                         <h3 class="font-bold text-slate-800 mb-4">Detalhes das Parcelas</h3>
                         <div class="overflow-x-auto">
@@ -705,7 +705,7 @@
                     </div>
                 </div>
 
-                <!-- 9. LISTA DE CADASTROS ABA (PAGES 20, 23, 26, 29) -->
+                <!-- 9. ABA DE LISTA DE CADASTROS (PÁGINAS 20, 23, 26, 29) -->
                 <div id="screen-cadastros-list" class="app-screen hidden space-y-6">
                     <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
                         <h2 class="text-2xl font-bold text-slate-800">Lista de Cadastros</h2>
@@ -719,7 +719,7 @@
                         </div>
                     </div>
 
-                    <!-- Abas de Filtro -->
+                    <!-- Abas de filtro -->
                     <div class="flex border-b border-slate-200 gap-4 text-sm font-semibold overflow-x-auto">
                         <button class="pb-3 border-b-2 border-blue-600 text-blue-600">Clientes</button>
                         <button class="pb-3 text-slate-400 hover:text-slate-600">Vendedores</button>
@@ -727,7 +727,7 @@
                         <button class="pb-3 text-slate-400 hover:text-slate-600">Administradores</button>
                     </div>
 
-                    <!-- Cards de Cadastros -->
+                    <!-- Cartões de cadastros -->
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
                         <div class="bg-white p-5 rounded-2xl shadow-sm border border-slate-200 flex justify-between items-center">
                             <div>
@@ -758,7 +758,7 @@
                     </div>
                 </div>
 
-                <!-- 10. CADASTRO DE USUÁRIO (PAGES 24, 27, 30, 32, 33) -->
+                <!-- 10. CADASTRO DE USUÁRIO (PÁGINAS 24, 27, 30, 32, 33) -->
                 <div id="screen-cadastro-usuario" class="app-screen hidden max-w-xl mx-auto">
                     <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-200 text-center">
                         <div class="w-16 h-16 bg-slate-100 rounded-full flex items-center justify-center text-slate-500 text-2xl mx-auto mb-4">
@@ -808,12 +808,12 @@
                     </div>
                 </div>
 
-                <!-- 11. AJUSTES DO SISTEMA (PAGES 34, 35, 36, 37, 38, 39, 40) -->
+                <!-- 11. AJUSTES DO SISTEMA (PÁGINAS 34, 35, 36, 37, 38, 39, 40) -->
                 <div id="screen-ajustes" class="app-screen hidden space-y-6">
                     <h2 class="text-2xl font-bold text-slate-800">Ajustes do Sistema</h2>
 
                     <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-                        <!-- Card 1: Tipo de Cliente -->
+                        <!-- Cartão 1: tipo de cliente -->
                         <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200">
                             <div class="flex justify-between items-center mb-4">
                                 <h3 class="font-bold text-slate-800">Tipo de Cliente</h3>
@@ -838,7 +838,7 @@
                             </div>
                         </div>
 
-                        <!-- Card 2: Tipo de Contrato -->
+                        <!-- Cartão 2: tipo de contrato -->
                         <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200">
                             <div class="flex justify-between items-center mb-4">
                                 <h3 class="font-bold text-slate-800">Tipo de Contrato</h3>
@@ -859,7 +859,7 @@
                             </div>
                         </div>
 
-                        <!-- Card 3: Produtos -->
+                        <!-- Cartão 3: produtos -->
                         <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200">
                             <div class="flex justify-between items-center mb-4">
                                 <h3 class="font-bold text-slate-800">Produtos</h3>
@@ -883,9 +883,9 @@
         </div>
     </div>
 
-    <!-- MODALS -->
+    <!-- JANELAS MODAIS -->
     
-    <!-- Modal Confirm profile/edit -->
+    <!-- Modal de confirmação da edição do perfil -->
     <div id="modal-confirm-profile" class="hidden fixed inset-0 bg-slate-900/50 backdrop-blur-sm z-50 flex items-center justify-center p-4">
         <div class="bg-white p-6 rounded-2xl shadow-2xl max-w-sm w-full text-center space-y-4">
             <h3 class="text-lg font-bold text-slate-800">Confirmar alteração ?</h3>
@@ -896,7 +896,7 @@
         </div>
     </div>
 
-    <!-- Modal Cancel Venda -->
+    <!-- Modal de cancelamento da venda -->
     <div id="modal-cancel-venda" class="hidden fixed inset-0 bg-slate-900/50 backdrop-blur-sm z-50 flex items-center justify-center p-4">
         <div class="bg-white p-6 rounded-2xl shadow-2xl max-w-md w-full space-y-4">
             <h3 class="text-xl font-bold text-red-600 text-center">Cancelamento Venda</h3>
@@ -910,7 +910,7 @@
         </div>
     </div>
 
-    <!-- Modal Config Parcelas -->
+    <!-- Modal de configuração das parcelas -->
     <div id="modal-parcelas" class="hidden fixed inset-0 bg-slate-900/50 backdrop-blur-sm z-50 flex items-center justify-center p-4">
         <div class="bg-white p-6 rounded-2xl shadow-2xl max-w-md w-full space-y-4 max-h-[80vh] flex flex-col">
             <h3 class="text-lg font-bold text-slate-800 text-center">Configuração de Parcelas</h3>
@@ -930,7 +930,7 @@
         </div>
     </div>
 
-    <!-- Modal Novo Produto -->
+    <!-- Modal de novo produto -->
     <div id="modal-novo-produto" class="hidden fixed inset-0 bg-slate-900/50 backdrop-blur-sm z-50 flex items-center justify-center p-4">
         <div class="bg-white p-6 rounded-2xl shadow-2xl max-w-md w-full space-y-4">
             <h3 class="text-lg font-bold text-slate-800 text-center">Cadastro Produto</h3>
@@ -950,7 +950,7 @@
         </div>
     </div>
 
-    <!-- Modal Novo Tipo Cliente -->
+    <!-- Modal de novo tipo de cliente -->
     <div id="modal-novo-tipo-cliente" class="hidden fixed inset-0 bg-slate-900/50 backdrop-blur-sm z-50 flex items-center justify-center p-4">
         <div class="bg-white p-6 rounded-2xl shadow-2xl max-w-sm w-full space-y-4">
             <h3 class="text-lg font-bold text-slate-800 text-center">Tipo de cliente</h3>
@@ -966,7 +966,7 @@
         </div>
     </div>
 
-    <!-- Modal Novo Tipo Contrato -->
+    <!-- Modal de novo tipo de contrato -->
     <div id="modal-novo-tipo-contrato" class="hidden fixed inset-0 bg-slate-900/50 backdrop-blur-sm z-50 flex items-center justify-center p-4">
         <div class="bg-white p-6 rounded-2xl shadow-2xl max-w-sm w-full space-y-4">
             <h3 class="text-lg font-bold text-slate-800 text-center">Tipo de Contrato</h3>
@@ -978,10 +978,10 @@
         </div>
     </div>
 
-    <!-- JAVASCRIPT FOR ROUTING & INTERACTIVITY -->
+    <!-- JAVASCRIPT PARA NAVEGAÇÃO E INTERATIVIDADE -->
     <script>
         function navigateTo(screenId) {
-            // If screen is login or forgot password, hide app layout
+            // Se a tela for de login ou recuperação de senha, oculta a estrutura do aplicativo
             if(screenId === 'screen-login' || screenId === 'screen-forgot-password') {
                 document.getElementById('app-layout').classList.add('hidden');
                 document.getElementById('screen-login').classList.add('hidden');
@@ -990,22 +990,22 @@
                 return;
             }
 
-            // Show app layout
+            // Exibe a estrutura do aplicativo
             document.getElementById('screen-login').classList.add('hidden');
             document.getElementById('screen-forgot-password').classList.add('hidden');
             document.getElementById('app-layout').classList.remove('hidden');
 
-            // Hide all sub-screens
+            // Oculta todas as telas secundárias
             const screens = document.querySelectorAll('.app-screen');
             screens.forEach(s => s.classList.add('hidden'));
 
-            // Show target screen
+            // Exibe a tela selecionada
             const target = document.getElementById(screenId);
             if(target) {
                 target.classList.remove('hidden');
             }
 
-            // Scroll top
+            // Rola até o topo
             window.scrollTo(0, 0);
         }
 
