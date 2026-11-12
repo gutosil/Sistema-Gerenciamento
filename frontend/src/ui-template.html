@@ -1,0 +1,1026 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MAIS CODE - Sistema de Gestão</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#1d61d1',
+                        primaryHover: '#154da8',
+                        darkSidebar: '#1e293b',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 3px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 font-sans text-gray-800 antialiased min-h-screen">
+
+    <!-- LOGIN SCREEN -->
+    <div id="screen-login" class="flex min-h-screen bg-slate-100">
+        <!-- Left Side: Banner / Info -->
+        <div class="hidden lg:flex lg:w-1/2 bg-slate-900 text-white flex-col justify-between p-12 relative overflow-hidden">
+            <div class="absolute -right-20 -bottom-20 w-96 h-96 bg-blue-600 rounded-full blur-3xl opacity-20"></div>
+            <div class="z-10">
+                <div class="flex items-center gap-3 text-blue-400 font-bold text-3xl tracking-wider mb-2">
+                    <i class="fa-solid font-mono text-4xl">&lt;+&gt;</i>
+                    <span>mais code</span>
+                </div>
+                <p class="text-xs tracking-widest text-slate-400 uppercase font-semibold">[E MUITO MAIS]</p>
+            </div>
+            <div class="z-10 max-w-lg">
+                <h1 class="text-4xl font-extrabold mb-4 leading-tight">Bem-vindo de volta!</h1>
+                <p class="text-slate-300 text-lg leading-relaxed">
+                    Desenvolvimento de produtos customizados para impulsionar sua empresa e melhorar seu posicionamento digital.
+                </p>
+            </div>
+            <div class="z-10 text-xs text-slate-500">
+                &copy; 2026 Mais Code. Todos os direitos reservados.
+            </div>
+        </div>
+
+        <!-- Right Side: Login Form -->
+        <div class="w-full lg:w-1/2 flex items-center justify-center p-6 md:p-12">
+            <div class="w-full max-w-md bg-white p-8 md:p-10 rounded-2xl shadow-xl border border-slate-100">
+                <div class="lg:hidden text-center mb-8">
+                    <div class="inline-flex items-center gap-2 text-blue-600 font-bold text-2xl mb-1">
+                        <i class="fa-solid font-mono">&lt;+&gt;</i>
+                        <span>mais code</span>
+                    </div>
+                    <p class="text-xs text-slate-400 tracking-widest uppercase">[E MUITO MAIS]</p>
+                </div>
+                
+                <h2 class="text-xl font-bold text-slate-800 mb-6 text-center lg:text-left">FAÇA LOGIN</h2>
+                
+                <form onsubmit="event.preventDefault(); navigateTo('screen-home');">
+                    <div class="mb-5">
+                        <label class="block text-xs font-medium text-slate-500 mb-1">Usuário / E-mail</label>
+                        <input type="text" value="Admin" required class="w-full border-b-2 border-slate-300 focus:border-blue-600 outline-none py-2 text-slate-700 transition">
+                    </div>
+                    
+                    <div class="mb-6">
+                        <label class="block text-xs font-medium text-slate-500 mb-1">Senha</label>
+                        <input type="password" value="******" required class="w-full border-b-2 border-slate-300 focus:border-blue-600 outline-none py-2 text-slate-700 transition">
+                    </div>
+
+                    <div class="flex items-center justify-between mb-8">
+                        <label class="flex items-center gap-2 text-sm text-slate-600 cursor-pointer">
+                            <input type="checkbox" class="rounded border-slate-300 text-blue-600 focus:ring-blue-500">
+                            <span>Lembrar</span>
+                        </label>
+                        <button type="button" onclick="navigateTo('screen-forgot-password')" class="text-sm text-slate-600 hover:text-blue-600 transition">
+                            Esqueci minha senha
+                        </button>
+                    </div>
+
+                    <button type="submit" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-3 rounded-xl shadow-lg shadow-blue-500/30 transition duration-200">
+                        Entrar
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- FORGOT PASSWORD SCREEN -->
+    <div id="screen-forgot-password" class="hidden flex min-h-screen bg-slate-100">
+        <div class="hidden lg:flex lg:w-1/2 bg-slate-900 text-white flex-col justify-between p-12">
+            <div>
+                <div class="flex items-center gap-3 text-blue-400 font-bold text-3xl tracking-wider mb-2">
+                    <i class="fa-solid font-mono text-4xl">&lt;+&gt;</i>
+                    <span>mais code</span>
+                </div>
+                <p class="text-xs tracking-widest text-slate-400 uppercase font-semibold">[E MUITO MAIS]</p>
+            </div>
+            <div class="max-w-lg">
+                <h1 class="text-3xl font-extrabold mb-4">Esqueceu sua senha?</h1>
+                <p class="text-slate-300 text-base leading-relaxed">
+                    Preencha os dados ao lado para solicitar a recuperação de senha.
+                </p>
+            </div>
+            <div class="text-xs text-slate-500">&copy; 2026 Mais Code</div>
+        </div>
+
+        <div class="w-full lg:w-1/2 flex items-center justify-center p-6 md:p-12">
+            <div class="w-full max-w-md bg-white p-8 md:p-10 rounded-2xl shadow-xl border border-slate-100">
+                <h2 class="text-xl font-bold text-slate-800 mb-6 text-center">REDEFINIR SENHA</h2>
+                
+                <form onsubmit="event.preventDefault(); alert('Instruções enviadas para seu e-mail!'); navigateTo('screen-login');">
+                    <div class="mb-6">
+                        <label class="block text-xs font-medium text-slate-500 mb-1">E-mail de acesso:</label>
+                        <input type="email" placeholder="seuemail@exemplo.com" required class="w-full border-b-2 border-slate-300 focus:border-blue-600 outline-none py-2 text-slate-700 transition">
+                    </div>
+
+                    <p class="text-xs text-slate-500 mb-8 leading-relaxed">
+                        Você irá receber um e-mail no endereço informado acima contendo o procedimento para criar uma nova senha para esse usuário.
+                    </p>
+
+                    <div class="flex gap-4">
+                        <button type="button" onclick="navigateTo('screen-login')" class="w-1/2 bg-slate-200 hover:bg-slate-300 text-slate-700 font-medium py-3 rounded-xl transition">
+                            Voltar
+                        </button>
+                        <button type="submit" class="w-1/2 bg-blue-600 hover:bg-blue-700 text-white font-medium py-3 rounded-xl shadow-lg shadow-blue-500/30 transition">
+                            Enviar
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- MAIN APP LAYOUT (HEADER + SIDEBAR + CONTENT) -->
+    <div id="app-layout" class="hidden min-h-screen flex flex-col">
+        
+        <!-- HEADER -->
+        <header class="bg-white border-b border-slate-200 h-16 flex items-center justify-between px-4 md:px-6 sticky top-0 z-20">
+            <div class="flex items-center gap-4">
+                <button onclick="toggleSidebar()" class="lg:hidden text-slate-600 hover:text-slate-900 p-2">
+                    <i class="fa-solid fa-bars text-xl"></i>
+                </button>
+                <div class="flex items-center gap-2 text-blue-600 font-bold text-xl cursor-pointer" onclick="navigateTo('screen-home')">
+                    <span class="font-mono text-2xl">&lt;+&gt;</span>
+                    <span class="hidden sm:inline">mais code</span>
+                </div>
+            </div>
+
+            <!-- Header Right / User Welcome -->
+            <div class="flex items-center gap-4">
+                <div class="text-right hidden sm:block">
+                    <p class="text-sm font-semibold text-slate-800">Bem-vindo, Calebe</p>
+                    <p class="text-xs text-slate-400">Ficamos felizes em vê-lo novamente</p>
+                </div>
+                <div class="w-10 h-10 rounded-full bg-slate-200 border-2 border-blue-500 flex items-center justify-center text-slate-600 cursor-pointer" onclick="navigateTo('screen-profile')">
+                    <i class="fa-solid fa-user"></i>
+                </div>
+            </div>
+        </header>
+
+        <div class="flex flex-1">
+            <!-- SIDEBAR -->
+            <aside id="sidebar" class="fixed lg:static inset-y-0 left-0 transform -translate-x-full lg:translate-x-0 transition-transform duration-200 ease-in-out z-30 w-64 bg-slate-900 text-slate-300 flex flex-col justify-between border-r border-slate-800">
+                <div class="p-4">
+                    <div class="text-xs font-semibold text-slate-500 uppercase tracking-wider px-3 mb-4">Navegação</div>
+                    <nav class="space-y-1">
+                        <button onclick="navigateTo('screen-home')" class="nav-btn w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium hover:bg-slate-800 hover:text-white transition">
+                            <i class="fa-solid fa-house w-5"></i> Home
+                        </button>
+                        <button onclick="navigateTo('screen-cadastros-list')" class="nav-btn w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium hover:bg-slate-800 hover:text-white transition">
+                            <i class="fa-solid fa-user-plus w-5"></i> Cadastro
+                        </button>
+                        <button onclick="navigateTo('screen-relatorio')" class="nav-btn w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium hover:bg-slate-800 hover:text-white transition">
+                            <i class="fa-solid fa-chart-bar w-5"></i> Relatório
+                        </button>
+                        <button onclick="navigateTo('screen-financeiro-usuarios')" class="nav-btn w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium hover:bg-slate-800 hover:text-white transition">
+                            <i class="fa-solid fa-dollar-sign w-5"></i> Financeiro
+                        </button>
+                        <button onclick="navigateTo('screen-comissoes')" class="nav-btn w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium hover:bg-slate-800 hover:text-white transition">
+                            <i class="fa-solid fa-list-check w-5"></i> Gestão
+                        </button>
+                        <button onclick="navigateTo('screen-ajustes')" class="nav-btn w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium hover:bg-slate-800 hover:text-white transition">
+                            <i class="fa-solid fa-gear w-5"></i> Ajustes
+                        </button>
+                    </nav>
+                </div>
+
+                <div class="p-4 border-t border-slate-800 space-y-1">
+                    <button onclick="navigateTo('screen-profile')" class="w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium hover:bg-slate-800 hover:text-white transition">
+                        <i class="fa-solid fa-circle-user w-5"></i> Perfil
+                    </button>
+                    <button onclick="navigateTo('screen-login')" class="w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-red-400 hover:bg-slate-800 hover:text-red-300 transition">
+                        <i class="fa-solid fa-right-from-bracket w-5"></i> Sair
+                    </button>
+                </div>
+            </aside>
+
+            <!-- MAIN CONTENT CONTAINER -->
+            <main class="flex-1 p-4 md:p-8 overflow-y-auto custom-scrollbar">
+
+                <!-- 1. HOME SCREEN (PAGE 3) -->
+                <div id="screen-home" class="app-screen space-y-6">
+                    <!-- Top Vendedores Podio -->
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 flex flex-col items-center justify-center text-center">
+                            <span class="text-xs font-bold text-amber-600 bg-amber-100 px-3 py-1 rounded-full mb-2">#2 LUGAR</span>
+                            <div class="w-16 h-16 rounded-full bg-slate-200 flex items-center justify-center text-slate-700 text-xl font-bold mb-2">G</div>
+                            <h3 class="font-bold text-slate-800">Gustavo</h3>
+                            <p class="text-xs text-slate-400">Vendedor Destaque</p>
+                        </div>
+                        <div class="bg-white p-6 rounded-2xl shadow-md border-2 border-blue-500 flex flex-col items-center justify-center text-center transform -translate-y-1">
+                            <span class="text-xs font-bold text-blue-600 bg-blue-100 px-3 py-1 rounded-full mb-2">#1 LUGAR</span>
+                            <div class="w-20 h-20 rounded-full bg-blue-600 text-white flex items-center justify-center text-2xl font-bold mb-2 shadow-md">J</div>
+                            <h3 class="font-bold text-slate-800 text-lg">João</h3>
+                            <p class="text-xs text-slate-400">Top Vendedor</p>
+                        </div>
+                        <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 flex flex-col items-center justify-center text-center">
+                            <span class="text-xs font-bold text-amber-700 bg-amber-50 px-3 py-1 rounded-full mb-2">#3 LUGAR</span>
+                            <div class="w-16 h-16 rounded-full bg-slate-200 flex items-center justify-center text-slate-700 text-xl font-bold mb-2">H</div>
+                            <h3 class="font-bold text-slate-800">Hugo</h3>
+                            <p class="text-xs text-slate-400">Vendedor Destaque</p>
+                        </div>
+                    </div>
+
+                    <!-- Remuneração & Card -->
+                    <div class="bg-gradient-to-r from-blue-600 to-indigo-700 text-white p-6 rounded-2xl shadow-lg flex flex-col sm:flex-row items-center justify-between gap-4">
+                        <div>
+                            <p class="text-xs uppercase tracking-wider text-blue-200 font-medium">Remuneração Atual</p>
+                            <h2 class="text-3xl font-extrabold mt-1">R$ 5.000,00</h2>
+                        </div>
+                        <button onclick="navigateTo('screen-comissoes')" class="bg-white text-blue-700 font-semibold px-5 py-2.5 rounded-xl shadow hover:bg-blue-50 transition">
+                            Ver Detalhes das Vendas
+                        </button>
+                    </div>
+
+                    <!-- Últimas Vendas Table -->
+                    <div class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6">
+                        <h3 class="text-lg font-bold text-slate-800 mb-4">Últimas Vendas</h3>
+                        <div class="overflow-x-auto">
+                            <table class="w-full text-left text-sm text-slate-600">
+                                <thead class="bg-slate-50 text-slate-500 font-semibold border-b">
+                                    <tr>
+                                        <th class="p-3">N. Contrato</th>
+                                        <th class="p-3">Data</th>
+                                        <th class="p-3">Cliente</th>
+                                        <th class="p-3">Status</th>
+                                        <th class="p-3 text-right">Ação</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="divide-y divide-slate-100">
+                                    <script>
+                                        for(let i=0; i<5; i++) {
+                                            document.write(`
+                                                <tr class="hover:bg-slate-50 transition">
+                                                    <td class="p-3 font-medium text-slate-800">#1201</td>
+                                                    <td class="p-3">13/08/2023</td>
+                                                    <td class="p-3">Senac</td>
+                                                    <td class="p-3"><span class="bg-green-100 text-green-700 px-2.5 py-1 rounded-full text-xs font-semibold">Ativo</span></td>
+                                                    <td class="p-3 text-right">
+                                                        <button onclick="navigateTo('screen-venda-detalhes')" class="text-blue-600 hover:text-blue-800 font-medium text-xs">Ver Contrato</button>
+                                                    </td>
+                                                </tr>
+                                            `);
+                                        }
+                                    </script>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 2. PERFIL USER SCREEN (PAGES 4, 5, 6) -->
+                <div id="screen-profile" class="app-screen hidden max-w-2xl mx-auto">
+                    <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-200 text-center">
+                        <h2 class="text-xl font-bold text-slate-800 mb-6 text-left">Usuário</h2>
+                        
+                        <div class="flex flex-col items-center mb-8">
+                            <div class="w-24 h-24 rounded-full bg-slate-100 border-2 border-dashed border-slate-300 flex items-center justify-center text-slate-400 mb-2 cursor-pointer hover:bg-slate-50">
+                                <i class="fa-solid fa-user text-4xl"></i>
+                            </div>
+                            <button class="text-xs font-medium text-blue-600 hover:underline">Editar foto</button>
+                        </div>
+
+                        <form onsubmit="event.preventDefault(); showModal('modal-confirm-profile');" class="space-y-6 text-left">
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                                <div>
+                                    <label class="block text-xs text-slate-500 mb-1">Nome</label>
+                                    <input type="text" value="Gabriel Silva" class="w-full border-b-2 border-slate-300 focus:border-blue-600 outline-none py-1.5 text-slate-800 font-medium">
+                                </div>
+                                <div>
+                                    <label class="block text-xs text-slate-500 mb-1">CPF</label>
+                                    <input type="text" value="055.378.987-35" class="w-full border-b-2 border-slate-300 focus:border-blue-600 outline-none py-1.5 text-slate-800 font-medium">
+                                </div>
+                                <div>
+                                    <label class="block text-xs text-slate-500 mb-1">E-mail</label>
+                                    <input type="email" value="gabrielteste@gmail.com" class="w-full border-b-2 border-slate-300 focus:border-blue-600 outline-none py-1.5 text-slate-800 font-medium">
+                                </div>
+                                <div>
+                                    <label class="block text-xs text-slate-500 mb-1">Senha</label>
+                                    <input type="password" value="****************" class="w-full border-b-2 border-slate-300 focus:border-blue-600 outline-none py-1.5 text-slate-800 font-medium">
+                                </div>
+                            </div>
+
+                            <div class="pt-4 flex justify-center">
+                                <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white font-medium px-12 py-3 rounded-xl shadow-md transition">
+                                    EDITAR / ALTERAR
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- 3. RELATÓRIO SCREEN (PAGE 7) -->
+                <div id="screen-relatorio" class="app-screen hidden space-y-6">
+                    <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+                        <h2 class="text-2xl font-bold text-slate-800">Relatório de Vendas</h2>
+                        <div class="relative w-full sm:w-72">
+                            <i class="fa-solid fa-magnifying-glass absolute left-3 top-3 text-slate-400"></i>
+                            <input type="text" placeholder="Pesquisar..." class="w-full pl-9 pr-4 py-2 bg-white border border-slate-200 rounded-xl text-sm focus:outline-none focus:border-blue-500">
+                        </div>
+                    </div>
+
+                    <div class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden">
+                        <div class="overflow-x-auto">
+                            <table class="w-full text-left text-sm text-slate-600">
+                                <thead class="bg-slate-50 text-slate-500 font-semibold border-b">
+                                    <tr>
+                                        <th class="p-4">N. Contrato</th>
+                                        <th class="p-4">Data</th>
+                                        <th class="p-4">Cliente</th>
+                                        <th class="p-4">Novo/Antigo</th>
+                                        <th class="p-4">Vendedor</th>
+                                        <th class="p-4">Valor</th>
+                                        <th class="p-4">Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="divide-y divide-slate-100">
+                                    <script>
+                                        const statuses = ['Ativo', 'Ativo', 'Concluido', 'Inativo', 'Ativo'];
+                                        const statusClasses = {
+                                            'Ativo': 'bg-green-100 text-green-700',
+                                            'Concluido': 'bg-blue-100 text-blue-700',
+                                            'Inativo': 'bg-red-100 text-red-700'
+                                        };
+                                        for(let i=0; i<10; i++) {
+                                            let st = statuses[i % statuses.length];
+                                            document.write(`
+                                                <tr class="hover:bg-slate-50 transition cursor-pointer" onclick="navigateTo('screen-venda-detalhes')">
+                                                    <td class="p-4 font-semibold text-slate-800">#1201</td>
+                                                    <td class="p-4">13/08/2023</td>
+                                                    <td class="p-4 font-medium text-slate-700">Gustavo</td>
+                                                    <td class="p-4"><span class="bg-slate-100 text-slate-600 px-2 py-0.5 rounded text-xs">Novo</span></td>
+                                                    <td class="p-4">Joao</td>
+                                                    <td class="p-4 font-semibold text-slate-800">R$ 100.000,00</td>
+                                                    <td class="p-4"><span class="${statusClasses[st]} px-2.5 py-1 rounded-full text-xs font-semibold">${st}</span></td>
+                                                </tr>
+                                            `);
+                                        }
+                                    </script>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="p-4 border-t border-slate-100 flex justify-between items-center text-xs text-slate-500">
+                            <span>Mostrando 1-10 de 50 registros</span>
+                            <div class="flex gap-2">
+                                <button class="px-3 py-1 bg-slate-100 rounded hover:bg-slate-200">Anterior</button>
+                                <button class="px-3 py-1 bg-blue-600 text-white rounded">1</button>
+                                <button class="px-3 py-1 bg-slate-100 rounded hover:bg-slate-200">Próximo</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 4. DETALHES DA VENDA / CONTRATO (PAGES 8, 9, 10, 11, 12, 13, 14) -->
+                <div id="screen-venda-detalhes" class="app-screen hidden max-w-5xl mx-auto space-y-6">
+                    <div class="flex justify-between items-center">
+                        <h2 class="text-2xl font-bold text-slate-800">Detalhes da Venda / Novo Contrato</h2>
+                        <span class="text-lg font-bold text-blue-600">Nº 0153</span>
+                    </div>
+
+                    <form onsubmit="event.preventDefault(); showModal('modal-confirm-cadastro-contrato');">
+                        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                            <!-- Left: Dados do Contrato -->
+                            <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 space-y-4">
+                                <h3 class="font-bold text-slate-800 border-b pb-2">Dados do Contrato</h3>
+                                
+                                <div class="grid grid-cols-2 gap-4">
+                                    <div>
+                                        <label class="block text-xs text-slate-500 mb-1">Cliente</label>
+                                        <input type="text" value="Senac" class="w-full border-b border-slate-300 py-1 text-sm font-medium outline-none focus:border-blue-600">
+                                    </div>
+                                    <div>
+                                        <label class="block text-xs text-slate-500 mb-1">Vendedor</label>
+                                        <input type="text" value="Gustavo" class="w-full border-b border-slate-300 py-1 text-sm font-medium outline-none focus:border-blue-600">
+                                    </div>
+                                </div>
+
+                                <div class="grid grid-cols-2 gap-4">
+                                    <div>
+                                        <label class="block text-xs text-slate-500 mb-1">Data de Início</label>
+                                        <input type="text" value="24/10/2022" class="w-full border-b border-slate-300 py-1 text-sm outline-none focus:border-blue-600">
+                                    </div>
+                                    <div>
+                                        <label class="block text-xs text-slate-500 mb-1">Data de Término</label>
+                                        <input type="text" value="24/10/2023" class="w-full border-b border-slate-300 py-1 text-sm outline-none focus:border-blue-600">
+                                    </div>
+                                </div>
+
+                                <div class="grid grid-cols-2 gap-4 pt-2">
+                                    <div>
+                                        <label class="block text-xs text-slate-500 mb-1">Modelo de Contrato</label>
+                                        <div class="flex gap-4 my-2 text-xs">
+                                            <label class="flex items-center gap-1"><input type="radio" name="modelo" checked> Contínuo</label>
+                                            <label class="flex items-center gap-1"><input type="radio" name="modelo"> Pontual</label>
+                                        </div>
+                                        <select class="w-full border rounded-lg p-2 text-xs border-slate-300 outline-none">
+                                            <option>Hora dev PHP</option>
+                                            <option>Desenvolvimento Web</option>
+                                        </select>
+                                    </div>
+                                    <div>
+                                        <label class="block text-xs text-slate-500 mb-1">Horas trabalhadas</label>
+                                        <input type="number" value="1000" class="w-full border-b border-slate-300 py-1 text-sm font-semibold outline-none focus:border-blue-600">
+                                    </div>
+                                </div>
+
+                                <h3 class="font-bold text-slate-800 border-b pb-2 pt-4">Dados do Contato</h3>
+                                <div class="space-y-3">
+                                    <div>
+                                        <label class="block text-xs text-slate-500 mb-1">Nome Contato</label>
+                                        <input type="text" value="Calebe" class="w-full border-b border-slate-300 py-1 text-sm outline-none focus:border-blue-600">
+                                    </div>
+                                    <div class="grid grid-cols-2 gap-4">
+                                        <div>
+                                            <label class="block text-xs text-slate-500 mb-1">Telefone</label>
+                                            <input type="text" value="(67) 99266-3456" class="w-full border-b border-slate-300 py-1 text-sm outline-none focus:border-blue-600">
+                                        </div>
+                                        <div>
+                                            <label class="block text-xs text-slate-500 mb-1">E-mail</label>
+                                            <input type="email" value="calebepereira@gmail.com.br" class="w-full border-b border-slate-300 py-1 text-sm outline-none focus:border-blue-600">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Right: Forma de Pagamento & Ações -->
+                            <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 flex flex-col justify-between space-y-4">
+                                <div>
+                                    <h3 class="font-bold text-slate-800 border-b pb-2">Forma de Pagamento</h3>
+                                    
+                                    <div class="mt-4 space-y-4">
+                                        <div>
+                                            <label class="block text-xs text-slate-500 mb-1">Valor da Entrada</label>
+                                            <input type="text" value="R$ 50.000,00" class="w-full border-b border-slate-300 py-1 text-base font-bold text-slate-800 outline-none">
+                                        </div>
+
+                                        <div class="grid grid-cols-2 gap-4">
+                                            <div>
+                                                <label class="block text-xs text-slate-500 mb-1">Status Cliente</label>
+                                                <select class="w-full border rounded-lg p-2 text-xs border-slate-300">
+                                                    <option>Novo</option>
+                                                    <option>Antigo</option>
+                                                </select>
+                                            </div>
+                                            <div>
+                                                <label class="block text-xs text-slate-500 mb-1">Status Contrato</label>
+                                                <div class="flex gap-2 text-xs mt-2">
+                                                    <label class="flex items-center gap-1"><input type="radio" name="st_c" checked> Ativo</label>
+                                                    <label class="flex items-center gap-1"><input type="radio" name="st_c"> Inativo</label>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div>
+                                            <label class="block text-xs text-slate-500 mb-2">Método de Pagamento</label>
+                                            <div class="flex items-center gap-6 text-xs">
+                                                <label class="flex items-center gap-1 cursor-pointer">
+                                                    <input type="radio" name="metodo" class="text-blue-600"> À vista
+                                                </label>
+                                                <label class="flex items-center gap-1 cursor-pointer">
+                                                    <input type="radio" name="metodo" checked class="text-blue-600"> Parcelado (36x)
+                                                </label>
+                                                <button type="button" onclick="showModal('modal-parcelas')" class="text-blue-600 hover:text-blue-800 text-xs font-semibold flex items-center gap-1">
+                                                    <i class="fa-solid fa-gear"></i> Config. Parcelas
+                                                </button>
+                                            </div>
+                                        </div>
+
+                                        <div class="bg-slate-50 p-4 rounded-xl border border-slate-200 mt-4">
+                                            <p class="text-xs text-slate-500">Total a Pagar</p>
+                                            <p class="text-2xl font-extrabold text-blue-600">R$ 50.000,00</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="flex gap-3 pt-4 border-t">
+                                    <button type="button" onclick="showModal('modal-cancel-venda')" class="w-1/3 bg-red-100 hover:bg-red-200 text-red-700 font-medium py-2.5 rounded-xl text-xs transition">
+                                        Cancelar Venda
+                                    </button>
+                                    <button type="submit" class="w-2/3 bg-blue-600 hover:bg-blue-700 text-white font-medium py-2.5 rounded-xl text-xs shadow-md transition">
+                                        CONFIRMAR / CADASTRAR
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- 5. CADASTRO CLIENTE SCREEN (PAGES 15, 16, 21, 22) -->
+                <div id="screen-cadastro-cliente" class="app-screen hidden max-w-xl mx-auto">
+                    <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-200 text-center">
+                        <div class="w-16 h-16 bg-blue-50 rounded-2xl flex items-center justify-center text-blue-600 text-2xl mx-auto mb-4">
+                            <i class="fa-solid fa-building"></i>
+                        </div>
+                        <h2 class="text-xl font-bold text-slate-800 mb-6">Cadastrar Cliente</h2>
+
+                        <form onsubmit="event.preventDefault(); showModal('modal-confirm-cliente');" class="space-y-6 text-left">
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                                <div>
+                                    <label class="block text-xs text-slate-500 mb-1">Nome / Razão Social</label>
+                                    <input type="text" placeholder="Digite o nome..." required class="w-full border-b-2 border-slate-300 focus:border-blue-600 outline-none py-1.5 text-sm">
+                                </div>
+                                <div>
+                                    <label class="block text-xs text-slate-500 mb-1">CNPJ / CPF</label>
+                                    <input type="text" placeholder="00.000.000/0000-00" required class="w-full border-b-2 border-slate-300 focus:border-blue-600 outline-none py-1.5 text-sm">
+                                </div>
+                                <div>
+                                    <label class="block text-xs text-slate-500 mb-1">E-mail</label>
+                                    <input type="email" placeholder="cliente@empresa.com" required class="w-full border-b-2 border-slate-300 focus:border-blue-600 outline-none py-1.5 text-sm">
+                                </div>
+                                <div>
+                                    <label class="block text-xs text-slate-500 mb-1">Endereço</label>
+                                    <input type="text" placeholder="Rua, número, cidade..." required class="w-full border-b-2 border-slate-300 focus:border-blue-600 outline-none py-1.5 text-sm">
+                                </div>
+                            </div>
+
+                            <button type="submit" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-3 rounded-xl shadow-md transition">
+                                CADASTRAR CLIENTE
+                            </button>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- 6. FINANCEIRO / LISTA DE USUÁRIOS (PAGE 17) -->
+                <div id="screen-financeiro-usuarios" class="app-screen hidden space-y-6">
+                    <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+                        <h2 class="text-2xl font-bold text-slate-800">Financeiro & Equipe</h2>
+                        <div class="relative w-full sm:w-72">
+                            <i class="fa-solid fa-magnifying-glass absolute left-3 top-3 text-slate-400"></i>
+                            <input type="text" placeholder="Pesquisar integrante..." class="w-full pl-9 pr-4 py-2 bg-white border border-slate-200 rounded-xl text-sm focus:outline-none focus:border-blue-500">
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                        <script>
+                            const users = [
+                                { name: 'Calebe', email: 'calebepereira@gmail.com.br', role: 'Administrador', color: 'bg-indigo-100 text-indigo-700' },
+                                { name: 'Gustavo', email: 'gustavo@gmail.com.br', role: 'Vendedor', color: 'bg-green-100 text-green-700' },
+                                { name: 'João', email: 'joao@gmail.com.br', role: 'Vendedor', color: 'bg-green-100 text-green-700' },
+                                { name: 'Caio', email: 'caio@gmail.com.br', role: 'Vendedor', color: 'bg-green-100 text-green-700' },
+                                { name: 'Wesley', email: 'wesley@gmail.com.br', role: 'Financeiro', color: 'bg-blue-100 text-blue-700' },
+                                { name: 'Jason', email: 'jason@gmail.com.br', role: 'Vendedor', color: 'bg-green-100 text-green-700' },
+                                { name: 'Hugo', email: 'hugo@gmail.com.br', role: 'Financeiro', color: 'bg-blue-100 text-blue-700' },
+                                { name: 'Danilo', email: 'danilo@gmail.com.br', role: 'Vendedor', color: 'bg-green-100 text-green-700' },
+                            ];
+                            users.forEach(u => {
+                                document.write(`
+                                    <div class="bg-white p-5 rounded-2xl shadow-sm border border-slate-200 flex flex-col justify-between hover:shadow-md transition">
+                                        <div class="flex items-start justify-between">
+                                            <div class="w-10 h-10 rounded-full bg-slate-100 flex items-center justify-center font-bold text-slate-700">
+                                                ${u.name[0]}
+                                            </div>
+                                            <span class="text-xs px-2.5 py-1 rounded-full font-semibold ${u.color}">${u.role}</span>
+                                        </div>
+                                        <div class="mt-4">
+                                            <h4 class="font-bold text-slate-800">${u.name}</h4>
+                                            <p class="text-xs text-slate-400 truncate">${u.email}</p>
+                                        </div>
+                                    </div>
+                                `);
+                            });
+                        </script>
+                    </div>
+                </div>
+
+                <!-- 7. GESTÃO DE COMISSÕES (PAGES 18, 19) -->
+                <div id="screen-comissoes" class="app-screen hidden space-y-6">
+                    <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+                        <div>
+                            <h2 class="text-2xl font-bold text-slate-800">Comissões & Gestão</h2>
+                            <p class="text-xs text-slate-500">Acompanhamento detalhado de remunerações</p>
+                        </div>
+                        <div class="bg-blue-50 border border-blue-200 px-4 py-2 rounded-xl">
+                            <span class="text-xs text-blue-600 font-semibold uppercase">Remuneração Total: </span>
+                            <span class="text-lg font-extrabold text-blue-700">R$ 47.260,00</span>
+                        </div>
+                    </div>
+
+                    <div class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden">
+                        <div class="overflow-x-auto">
+                            <table class="w-full text-left text-sm text-slate-600">
+                                <thead class="bg-slate-50 text-slate-500 font-semibold border-b">
+                                    <tr>
+                                        <th class="p-4">N. Contrato</th>
+                                        <th class="p-4">Data</th>
+                                        <th class="p-4">Cliente</th>
+                                        <th class="p-4">Tipo</th>
+                                        <th class="p-4">Parcelas</th>
+                                        <th class="p-4">Valor</th>
+                                        <th class="p-4">Comissão</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="divide-y divide-slate-100">
+                                    <script>
+                                        for(let i=1201; i<=1208; i++) {
+                                            document.write(`
+                                                <tr class="hover:bg-slate-50 transition cursor-pointer" onclick="navigateTo('screen-comissao-detalhes')">
+                                                    <td class="p-4 font-bold text-blue-600">#${i}</td>
+                                                    <td class="p-4">13/08/2023</td>
+                                                    <td class="p-4 font-medium text-slate-700">Gustavo</td>
+                                                    <td class="p-4"><span class="bg-slate-100 text-slate-600 px-2 py-0.5 rounded text-xs">Novo</span></td>
+                                                    <td class="p-4 font-medium">36X</td>
+                                                    <td class="p-4 font-semibold text-slate-800">R$ 100.000,00</td>
+                                                    <td class="p-4 font-bold text-green-600">R$ 2.780,00</td>
+                                                </tr>
+                                            `);
+                                        }
+                                    </script>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 8. DETALHES DA COMISSÃO (PAGE 19) -->
+                <div id="screen-comissao-detalhes" class="app-screen hidden max-w-4xl mx-auto space-y-6">
+                    <div class="flex justify-between items-center">
+                        <h2 class="text-2xl font-bold text-slate-800">Detalhes da Comissão</h2>
+                        <button onclick="navigateTo('screen-comissoes')" class="text-xs bg-slate-200 hover:bg-slate-300 px-3 py-1.5 rounded-lg font-medium">Voltar</button>
+                    </div>
+
+                    <!-- Card Contrato Resumo -->
+                    <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 grid grid-cols-1 sm:grid-cols-3 gap-4">
+                        <div>
+                            <span class="text-xs text-slate-400 block">Nº Contrato</span>
+                            <span class="text-lg font-bold text-slate-800">1201</span>
+                        </div>
+                        <div>
+                            <span class="text-xs text-slate-400 block">Data / Cliente</span>
+                            <span class="text-sm font-semibold text-slate-700">01/01/2023 - Senac</span>
+                        </div>
+                        <div>
+                            <span class="text-xs text-slate-400 block">Tipo / Valor Total</span>
+                            <span class="text-sm font-semibold text-slate-700">Novo (36x) - R$ 100.000,00</span>
+                        </div>
+                    </div>
+
+                    <!-- Tabela de Parcelas e Comissões -->
+                    <div class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6">
+                        <h3 class="font-bold text-slate-800 mb-4">Detalhes das Parcelas</h3>
+                        <div class="overflow-x-auto">
+                            <table class="w-full text-left text-sm text-slate-600">
+                                <thead class="bg-slate-50 text-slate-500 font-semibold border-b">
+                                    <tr>
+                                        <th class="p-3">Data</th>
+                                        <th class="p-3">Parcela</th>
+                                        <th class="p-3">Comissão</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="divide-y divide-slate-100">
+                                    <script>
+                                        for(let i=0; i<6; i++) {
+                                            document.write(`
+                                                <tr>
+                                                    <td class="p-3">20/01/2023</td>
+                                                    <td class="p-3">1x R$ 1.041,00</td>
+                                                    <td class="p-3 font-bold text-green-600">R$ 104,00</td>
+                                                </tr>
+                                            `);
+                                        }
+                                    </script>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 9. LISTA DE CADASTROS ABA (PAGES 20, 23, 26, 29) -->
+                <div id="screen-cadastros-list" class="app-screen hidden space-y-6">
+                    <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+                        <h2 class="text-2xl font-bold text-slate-800">Lista de Cadastros</h2>
+                        <div class="flex gap-2">
+                            <button onclick="navigateTo('screen-cadastro-cliente')" class="bg-blue-600 hover:bg-blue-700 text-white text-xs font-semibold px-4 py-2 rounded-xl shadow transition">
+                                + Novo Cliente
+                            </button>
+                            <button onclick="navigateTo('screen-cadastro-usuario')" class="bg-slate-800 hover:bg-slate-900 text-white text-xs font-semibold px-4 py-2 rounded-xl shadow transition">
+                                + Novo Usuário
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Abas de Filtro -->
+                    <div class="flex border-b border-slate-200 gap-4 text-sm font-semibold overflow-x-auto">
+                        <button class="pb-3 border-b-2 border-blue-600 text-blue-600">Clientes</button>
+                        <button class="pb-3 text-slate-400 hover:text-slate-600">Vendedores</button>
+                        <button class="pb-3 text-slate-400 hover:text-slate-600">Financeiro</button>
+                        <button class="pb-3 text-slate-400 hover:text-slate-600">Administradores</button>
+                    </div>
+
+                    <!-- Cards de Cadastros -->
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        <div class="bg-white p-5 rounded-2xl shadow-sm border border-slate-200 flex justify-between items-center">
+                            <div>
+                                <h4 class="font-bold text-slate-800">Gustavo</h4>
+                                <p class="text-xs text-slate-400">(67) 99999-9999</p>
+                                <span class="inline-block mt-2 text-xs bg-slate-100 text-slate-600 px-2 py-0.5 rounded">Pessoa Física</span>
+                            </div>
+                            <button onclick="navigateTo('screen-editar-usuario')" class="text-slate-400 hover:text-blue-600 p-2"><i class="fa-solid fa-pen"></i></button>
+                        </div>
+
+                        <div class="bg-white p-5 rounded-2xl shadow-sm border border-slate-200 flex justify-between items-center">
+                            <div>
+                                <h4 class="font-bold text-slate-800">IMPCG</h4>
+                                <p class="text-xs text-slate-400">(67) 99999-9999</p>
+                                <span class="inline-block mt-2 text-xs bg-blue-50 text-blue-600 px-2 py-0.5 rounded">Pessoa Jurídica</span>
+                            </div>
+                            <button onclick="navigateTo('screen-editar-cliente')" class="text-slate-400 hover:text-blue-600 p-2"><i class="fa-solid fa-pen"></i></button>
+                        </div>
+
+                        <div class="bg-white p-5 rounded-2xl shadow-sm border border-slate-200 flex justify-between items-center">
+                            <div>
+                                <h4 class="font-bold text-slate-800">Senac</h4>
+                                <p class="text-xs text-slate-400">(67) 99999-9999</p>
+                                <span class="inline-block mt-2 text-xs bg-blue-50 text-blue-600 px-2 py-0.5 rounded">Pessoa Jurídica</span>
+                            </div>
+                            <button onclick="navigateTo('screen-editar-cliente')" class="text-slate-400 hover:text-blue-600 p-2"><i class="fa-solid fa-pen"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 10. CADASTRO DE USUÁRIO (PAGES 24, 27, 30, 32, 33) -->
+                <div id="screen-cadastro-usuario" class="app-screen hidden max-w-xl mx-auto">
+                    <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-200 text-center">
+                        <div class="w-16 h-16 bg-slate-100 rounded-full flex items-center justify-center text-slate-500 text-2xl mx-auto mb-4">
+                            <i class="fa-solid fa-user"></i>
+                        </div>
+                        <h2 class="text-xl font-bold text-slate-800 mb-6">Cadastrar Usuário</h2>
+
+                        <form onsubmit="event.preventDefault(); showModal('modal-confirm-usuario');" class="space-y-6 text-left">
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                                <div>
+                                    <label class="block text-xs text-slate-500 mb-1">Nome</label>
+                                    <input type="text" placeholder="Nome completo" required class="w-full border-b-2 border-slate-300 focus:border-blue-600 outline-none py-1.5 text-sm">
+                                </div>
+                                <div>
+                                    <label class="block text-xs text-slate-500 mb-1">CPF</label>
+                                    <input type="text" placeholder="000.000.000-00" required class="w-full border-b-2 border-slate-300 focus:border-blue-600 outline-none py-1.5 text-sm">
+                                </div>
+                                <div>
+                                    <label class="block text-xs text-slate-500 mb-1">E-mail</label>
+                                    <input type="email" placeholder="email@exemplo.com" required class="w-full border-b-2 border-slate-300 focus:border-blue-600 outline-none py-1.5 text-sm">
+                                </div>
+                                <div>
+                                    <label class="block text-xs text-slate-500 mb-1">Senha</label>
+                                    <input type="password" placeholder="******" required class="w-full border-b-2 border-slate-300 focus:border-blue-600 outline-none py-1.5 text-sm">
+                                </div>
+                            </div>
+
+                            <div>
+                                <label class="block text-xs text-slate-500 mb-2">Cargo</label>
+                                <div class="flex gap-6 text-xs font-medium">
+                                    <label class="flex items-center gap-2 cursor-pointer">
+                                        <input type="radio" name="cargo" checked class="text-blue-600"> Vendedor
+                                    </label>
+                                    <label class="flex items-center gap-2 cursor-pointer">
+                                        <input type="radio" name="cargo" class="text-blue-600"> Financeiro
+                                    </label>
+                                    <label class="flex items-center gap-2 cursor-pointer">
+                                        <input type="radio" name="cargo" class="text-blue-600"> Administrador
+                                    </label>
+                                </div>
+                            </div>
+
+                            <button type="submit" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-3 rounded-xl shadow-md transition">
+                                CADASTRAR USUÁRIO
+                            </button>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- 11. AJUSTES DO SISTEMA (PAGES 34, 35, 36, 37, 38, 39, 40) -->
+                <div id="screen-ajustes" class="app-screen hidden space-y-6">
+                    <h2 class="text-2xl font-bold text-slate-800">Ajustes do Sistema</h2>
+
+                    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                        <!-- Card 1: Tipo de Cliente -->
+                        <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200">
+                            <div class="flex justify-between items-center mb-4">
+                                <h3 class="font-bold text-slate-800">Tipo de Cliente</h3>
+                                <div class="flex gap-2">
+                                    <button onclick="showModal('modal-novo-tipo-cliente')" class="w-7 h-7 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center font-bold text-xs hover:bg-blue-200">+</button>
+                                </div>
+                            </div>
+
+                            <div class="space-y-2">
+                                <div class="flex items-center justify-between p-2 bg-slate-50 rounded-lg text-sm">
+                                    <span>Novo</span>
+                                    <input type="checkbox" checked class="rounded text-blue-600">
+                                </div>
+                                <div class="flex items-center justify-between p-2 bg-slate-50 rounded-lg text-sm">
+                                    <span>Antigo</span>
+                                    <input type="checkbox" checked class="rounded text-blue-600">
+                                </div>
+                                <div class="flex items-center justify-between p-2 bg-slate-50 rounded-lg text-sm">
+                                    <span>Vintage</span>
+                                    <input type="checkbox" class="rounded text-blue-600">
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Card 2: Tipo de Contrato -->
+                        <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200">
+                            <div class="flex justify-between items-center mb-4">
+                                <h3 class="font-bold text-slate-800">Tipo de Contrato</h3>
+                                <div class="flex gap-2">
+                                    <button onclick="showModal('modal-novo-tipo-contrato')" class="w-7 h-7 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center font-bold text-xs hover:bg-blue-200">+</button>
+                                </div>
+                            </div>
+
+                            <div class="space-y-2">
+                                <div class="flex items-center justify-between p-2 bg-slate-50 rounded-lg text-sm">
+                                    <span>Pontual</span>
+                                    <input type="checkbox" checked class="rounded text-blue-600">
+                                </div>
+                                <div class="flex items-center justify-between p-2 bg-slate-50 rounded-lg text-sm">
+                                    <span>Contínuo</span>
+                                    <input type="checkbox" checked class="rounded text-blue-600">
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Card 3: Produtos -->
+                        <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200">
+                            <div class="flex justify-between items-center mb-4">
+                                <h3 class="font-bold text-slate-800">Produtos</h3>
+                                <button onclick="showModal('modal-novo-produto')" class="w-7 h-7 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center font-bold text-xs hover:bg-blue-200">+</button>
+                            </div>
+
+                            <div class="space-y-3">
+                                <div class="p-3 border border-slate-100 rounded-xl bg-slate-50 flex justify-between items-center">
+                                    <div>
+                                        <p class="font-semibold text-sm text-slate-800">Dev PHP</p>
+                                        <p class="text-xs text-slate-500">Novo: 10% | Antigo: 10%</p>
+                                    </div>
+                                    <span class="font-bold text-sm text-blue-600">R$ 60,00</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </main>
+        </div>
+    </div>
+
+    <!-- MODALS -->
+    
+    <!-- Modal Confirm profile/edit -->
+    <div id="modal-confirm-profile" class="hidden fixed inset-0 bg-slate-900/50 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+        <div class="bg-white p-6 rounded-2xl shadow-2xl max-w-sm w-full text-center space-y-4">
+            <h3 class="text-lg font-bold text-slate-800">Confirmar alteração ?</h3>
+            <div class="flex gap-3 pt-2">
+                <button onclick="closeModal('modal-confirm-profile')" class="w-1/2 border border-red-500 text-red-600 hover:bg-red-50 font-medium py-2 rounded-xl text-sm">CANCELAR</button>
+                <button onclick="closeModal('modal-confirm-profile'); alert('Alterações salvas!');" class="w-1/2 border border-green-600 text-green-600 hover:bg-green-50 font-medium py-2 rounded-xl text-sm">CONFIRMAR</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Cancel Venda -->
+    <div id="modal-cancel-venda" class="hidden fixed inset-0 bg-slate-900/50 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+        <div class="bg-white p-6 rounded-2xl shadow-2xl max-w-md w-full space-y-4">
+            <h3 class="text-xl font-bold text-red-600 text-center">Cancelamento Venda</h3>
+            <p class="text-xs text-slate-500 text-center">Explique o motivo do cancelamento da venda no campo abaixo</p>
+            <textarea rows="4" class="w-full border rounded-xl p-3 text-sm border-slate-300 outline-none focus:border-red-500" placeholder="Motivo..."></textarea>
+            <div class="flex justify-center">
+                <button onclick="closeModal('modal-cancel-venda'); alert('Venda cancelada!');" class="bg-green-700 hover:bg-green-800 text-white font-medium px-8 py-2.5 rounded-xl text-sm">
+                    CONFIRMAR
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Config Parcelas -->
+    <div id="modal-parcelas" class="hidden fixed inset-0 bg-slate-900/50 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+        <div class="bg-white p-6 rounded-2xl shadow-2xl max-w-md w-full space-y-4 max-h-[80vh] flex flex-col">
+            <h3 class="text-lg font-bold text-slate-800 text-center">Configuração de Parcelas</h3>
+            <div class="overflow-y-auto flex-1 space-y-2 pr-2 custom-scrollbar">
+                <script>
+                    for(let i=1; i<=12; i++) {
+                        document.write(`
+                            <div class="flex justify-between items-center p-2.5 bg-slate-50 border rounded-lg text-sm">
+                                <span>Parcela ${i}x</span>
+                                <span class="font-bold text-slate-700">R$ 1.041,00</span>
+                            </div>
+                        `);
+                    }
+                </script>
+            </div>
+            <button onclick="closeModal('modal-parcelas')" class="w-full bg-blue-600 text-white font-medium py-2.5 rounded-xl text-sm">CONFIRMAR</button>
+        </div>
+    </div>
+
+    <!-- Modal Novo Produto -->
+    <div id="modal-novo-produto" class="hidden fixed inset-0 bg-slate-900/50 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+        <div class="bg-white p-6 rounded-2xl shadow-2xl max-w-md w-full space-y-4">
+            <h3 class="text-lg font-bold text-slate-800 text-center">Cadastro Produto</h3>
+            <div class="space-y-3">
+                <input type="text" placeholder="Nome do Produto" class="w-full border-b py-2 text-sm outline-none border-slate-300">
+                <div class="flex gap-2">
+                    <input type="text" placeholder="R$ 60,00" class="w-1/3 border-b py-2 text-sm outline-none border-slate-300">
+                    <select class="w-1/3 border rounded-lg p-2 text-xs border-slate-300"><option>Novo %</option><option>10%</option></select>
+                    <select class="w-1/3 border rounded-lg p-2 text-xs border-slate-300"><option>Antigo %</option><option>15%</option></select>
+                </div>
+                <textarea placeholder="Descrição" class="w-full border rounded-xl p-3 text-sm border-slate-200 outline-none"></textarea>
+            </div>
+            <div class="flex gap-3">
+                <button onclick="closeModal('modal-novo-produto')" class="w-1/2 bg-slate-200 text-slate-700 font-medium py-2.5 rounded-xl text-xs">CANCELAR</button>
+                <button onclick="closeModal('modal-novo-produto'); alert('Produto cadastrado!');" class="w-1/2 bg-blue-600 text-white font-medium py-2.5 rounded-xl text-xs">CADASTRAR</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Novo Tipo Cliente -->
+    <div id="modal-novo-tipo-cliente" class="hidden fixed inset-0 bg-slate-900/50 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+        <div class="bg-white p-6 rounded-2xl shadow-2xl max-w-sm w-full space-y-4">
+            <h3 class="text-lg font-bold text-slate-800 text-center">Tipo de cliente</h3>
+            <input type="text" placeholder="Tipo do Cliente" class="w-full border-b py-2 text-sm outline-none border-slate-300">
+            <div class="flex gap-2">
+                <input type="text" placeholder="Porcentagem A" class="w-1/2 border-b py-2 text-sm outline-none border-slate-300">
+                <input type="text" placeholder="Porcentagem B" class="w-1/2 border-b py-2 text-sm outline-none border-slate-300">
+            </div>
+            <div class="flex gap-3 pt-2">
+                <button onclick="closeModal('modal-novo-tipo-cliente')" class="w-1/2 bg-slate-200 text-slate-700 font-medium py-2 rounded-xl text-xs">CANCELAR</button>
+                <button onclick="closeModal('modal-novo-tipo-cliente');" class="w-1/2 bg-blue-600 text-white font-medium py-2 rounded-xl text-xs">CADASTRAR</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Novo Tipo Contrato -->
+    <div id="modal-novo-tipo-contrato" class="hidden fixed inset-0 bg-slate-900/50 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+        <div class="bg-white p-6 rounded-2xl shadow-2xl max-w-sm w-full space-y-4">
+            <h3 class="text-lg font-bold text-slate-800 text-center">Tipo de Contrato</h3>
+            <input type="text" placeholder="Tipo do Contrato" class="w-full border-b py-2 text-sm outline-none border-slate-300">
+            <div class="flex gap-3 pt-2">
+                <button onclick="closeModal('modal-novo-tipo-contrato')" class="w-1/2 bg-slate-200 text-slate-700 font-medium py-2 rounded-xl text-xs">CANCELAR</button>
+                <button onclick="closeModal('modal-novo-tipo-contrato');" class="w-1/2 bg-blue-600 text-white font-medium py-2 rounded-xl text-xs">CADASTRAR</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- JAVASCRIPT FOR ROUTING & INTERACTIVITY -->
+    <script>
+        function navigateTo(screenId) {
+            // If screen is login or forgot password, hide app layout
+            if(screenId === 'screen-login' || screenId === 'screen-forgot-password') {
+                document.getElementById('app-layout').classList.add('hidden');
+                document.getElementById('screen-login').classList.add('hidden');
+                document.getElementById('screen-forgot-password').classList.add('hidden');
+                document.getElementById(screenId).classList.remove('hidden');
+                return;
+            }
+
+            // Show app layout
+            document.getElementById('screen-login').classList.add('hidden');
+            document.getElementById('screen-forgot-password').classList.add('hidden');
+            document.getElementById('app-layout').classList.remove('hidden');
+
+            // Hide all sub-screens
+            const screens = document.querySelectorAll('.app-screen');
+            screens.forEach(s => s.classList.add('hidden'));
+
+            // Show target screen
+            const target = document.getElementById(screenId);
+            if(target) {
+                target.classList.remove('hidden');
+            }
+
+            // Scroll top
+            window.scrollTo(0, 0);
+        }
+
+        function toggleSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            sidebar.classList.toggle('-translate-x-full');
+        }
+
+        function showModal(modalId) {
+            document.getElementById(modalId).classList.remove('hidden');
+        }
+
+        function closeModal(modalId) {
+            document.getElementById(modalId).classList.add('hidden');
+        }
+    </script>
+</body>
+</html>
